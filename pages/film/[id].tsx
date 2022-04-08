@@ -7,6 +7,7 @@ import confetti from 'canvas-confetti';
 import { Film } from "../../interfaces";
 import { getFilmsInfo, localFavorites } from "../../utils";
 import { MainLayout } from "../../components/layouts";
+import { ghibliApi } from "../../api";
 
 interface Props {
   film: Film;
@@ -75,7 +76,12 @@ const FilmPage: NextPage<Props> = ({ film }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async (ctx) => {
-  const films: string[] = [...Array(22)].map((value, index) => `${index + 1}`);
+
+  const { data } = await ghibliApi.get<Film[]>('/films');
+
+  //  Este map está de más pero lo dejo como ejemplo para cuando en la petición llega una
+  //  estructura más compleja.
+  const films: string[] = data.map(film => film.id);
 
   return {
     paths: films.map(id => ({
