@@ -6,8 +6,8 @@ import confetti from 'canvas-confetti';
 
 import { Film } from "../../interfaces";
 import { getFilmsInfo, localFavorites } from "../../utils";
-import { MainLayout } from "../../components/layouts";
 import { ghibliApi } from "../../api";
+import { MainLayout } from "../../components/layouts";
 
 interface Props {
   film: Film;
